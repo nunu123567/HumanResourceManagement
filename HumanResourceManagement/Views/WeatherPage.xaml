@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HumanResourceManagement.Views.WeatherPage"
+             x:DataType="vm:WeatherViewModel"
+             Title="WeatherPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Header -->
+            <Label Text="{Binding Heading}" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" />
+
+            <!-- Weather Card -->
+            <Border Padding="20" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="12" HorizontalOptions="Center">
+
+                    <!-- Temperature -->
+                    <Label Text="{Binding TemperatureText}" 
+                           FontSize="40" 
+                           FontAttributes="Bold" 
+                           TextColor="{StaticResource Primary}" 
+                           HorizontalOptions="Center" />
+
+                    <!-- Wind Speed -->
+                    <Label Text="{Binding WindText}" 
+                           FontSize="18" 
+                           HorizontalOptions="Center" />
+
+                    <!-- Kitesurf Alert Notice -->
+                    <Label Text="{Binding KitesurfAlert}" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="OrangeRed" 
+                           IsVisible="{Binding ShowKitesurfAlert}" 
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Refresh Button -->
+            <Button Text="Refresh Weather" 
+                    Command="{Binding LoadWeatherCommand}" 
+                    BackgroundColor="{StaticResource Primary}" />
+
+            <!-- Activity Indicator & Status Message -->
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                               IsVisible="{Binding IsBusy}" 
+                               HorizontalOptions="Center" />
+
+            <Label Text="{Binding Status}" 
+                   TextColor="Red" 
+                   HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
