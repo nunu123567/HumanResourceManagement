@@ -5,6 +5,7 @@ namespace HumanResourceManagement.Models
 {
     public partial class TodoItem : ObservableObject
     {
+        public int Id { get; set; }
         public string Title { get; set; } = "";
         public string Notes { get; set; } = "";
         public string Category { get; set; } = "";

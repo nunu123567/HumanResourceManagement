@@ -34,37 +34,53 @@ namespace HumanResourceManagement.ViewModels
             Summary = count == 1 ? "1 task" : $"{count} tasks";
         }
 
-        [RelayCommand]
-        private void Delete(TodoItem item)
+        public async Task LoadAsync()
         {
-            if (item != null)
+            try
             {
-                store.Remove(item);
+                await store.LoadAsync();
+            }
+            catch (Exception ex)
+            {
+                Summary = $"Could not load: {ex.Message}";
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteAsync(TodoItem item)     // still DeleteCommand
+        {
+            try
+            {
+                await store.RemoveAsync(item);
+            }
+            catch (Exception ex)
+            {
+                Summary = $"Could not delete: {ex.Message}";
             }
         }
 
         //public void ApplySort()
         //{
-            //string order = preferences.Get(SettingsKeys.SortOrder, SettingsDefaults.SortOrder);
+        //string order = preferences.Get(SettingsKeys.SortOrder, SettingsDefaults.SortOrder);
 
-            //List<TodoItem> sorted;
-            //if (order == "Due date")
-            //{
-                //sorted = Items.OrderBy(i => i.DueDate).ThenByDescending(i => i.Priority).ToList();
-            //}
-            //else
-            //{
-              //  sorted = Items.OrderByDescending(i => i.Priority).ThenBy(i => i.DueDate).ToList();
-            //}
+        //List<TodoItem> sorted;
+        //if (order == "Due date")
+        //{
+        //sorted = Items.OrderBy(i => i.DueDate).ThenByDescending(i => i.Priority).ToList();
+        //}
+        //else
+        //{
+        //  sorted = Items.OrderByDescending(i => i.Priority).ThenBy(i => i.DueDate).ToList();
+        //}
 
-            //for (int i = 0; i < sorted.Count; i++)
-            //{
-                //int oldIndex = Items.IndexOf(sorted[i]);
-               // if (oldIndex != i)
-                //{
-                //    Items.Move(oldIndex, i);
-                //}
-           // }
-       // }
+        //for (int i = 0; i < sorted.Count; i++)
+        //{
+        //int oldIndex = Items.IndexOf(sorted[i]);
+        // if (oldIndex != i)
+        //{
+        //    Items.Move(oldIndex, i);
+        //}
+        // }
+        // }
     }
 }

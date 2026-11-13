@@ -47,30 +47,42 @@ namespace HumanResourceManagement.ViewModels
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]
-        private void Save()
+        private async Task SaveAsync()        // the generated command is STILL called SaveCommand
         {
             var item = new TodoItem
             {
-                Title = Title?.Trim() ?? string.Empty,
-                Notes = Notes?.Trim() ?? string.Empty,
+                Title = Title.Trim(),
+                Notes = Notes?.Trim() ?? "",
                 Category = Category,
                 DueDate = DueDate,
                 Priority = (int)Priority,
                 Reminder = Reminder
             };
 
-            store.Add(item);
+            try
+            {
+                await store.AddAsync(item);
+            }
+            catch (Exception ex)
+            {
+                Result = $"Could not save: {ex.Message}";
+                return;                       // the form keeps its values
+            }
 
-            int count = store.Items.Count;
-            string reminderStatus = Reminder ? "reminder on" : "reminder off";
-            string formattedDate = DueDate.ToString("dd.MM.yyyy");
-
-            Result = $"Saved: {item.Title} · {Category} · P{item.Priority} · due {formattedDate} · {reminderStatus} ({count} in list)";
+            string reminderText = item.Reminder ? "on" : "off";
+            Result = $"Saved: {item.Title} · {item.Category} · P{item.Priority} · due {item.DueDate:dd.MM.yyyy} · reminder {reminderText} ({store.Items.Count} in list)";
 
             Title = "";
             Notes = "";
+            ApplyDefaults();                 
+        }
 
-            //ApplyDefaults();
+        private void ApplyDefaults()
+        {
+            Category = "Study";
+            Priority = 3;
+            Reminder = true;
+            DueDate = DateTime.Today.AddDays(1);
         }
 
         [ObservableProperty]

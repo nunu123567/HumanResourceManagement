@@ -13,11 +13,10 @@ namespace HumanResourceManagement.Views
             BindingContext = viewModel;
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             viewModel.OnAppearing();
-            TitleEntry.Focus();
         }
     }
 }
