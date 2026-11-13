@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HumanResourceManagement.ViewModels"
+             xmlns:models="clr-namespace:HumanResourceManagement.Models"
+             x:Class="HumanResourceManagement.Views.HomePage"
+             x:DataType="vm:HomeViewModel"
+             Title="Home">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Weather Card -->
+            <Border Padding="16" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8" HorizontalOptions="Center">
+                    <Label Text="Current Weather (Vaasa)" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="{Binding TemperatureText}" FontSize="36" FontAttributes="Bold" TextColor="{StaticResource Primary}" HorizontalOptions="Center" />
+                    <Label Text="{Binding WindText}" FontSize="16" HorizontalOptions="Center" />
+
+                    <!-- Kitesurf Alert Notice -->
+                    <Label Text="{Binding KitesurfAlert}" FontSize="18" FontAttributes="Bold" TextColor="OrangeRed"
+                           IsVisible="{Binding ShowKitesurfAlert}" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Top 3 To-Dos Card -->
+            <Border Padding="16" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Top 3 To-Dos" FontSize="18" FontAttributes="Bold" />
+
+                    <CollectionView ItemsSource="{Binding TopTodos}" HeightRequest="150">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:TodoItem">
+                                <HorizontalStackLayout Spacing="10" Padding="4">
+                                    <CheckBox IsChecked="{Binding IsDone}" />
+                                    <Label Text="{Binding Title}" VerticalOptions="Center" FontSize="16" />
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Refresh Button -->
+            <Button Text="Refresh Home Data" Command="{Binding LoadHomeDataCommand}" BackgroundColor="{StaticResource Primary}" />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" />
+            <Label Text="{Binding Status}" TextColor="Red" HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

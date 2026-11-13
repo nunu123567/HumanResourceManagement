@@ -7,6 +7,7 @@
        Title="HumanResourceManagement">
 
     <TabBar>
+        <ShellContent Title="Home" Route="HomePage" ContentTemplate="{DataTemplate views:HomePage}" />
         <ShellContent Title="Add task" Route="AddTaskPage"
                       ContentTemplate="{DataTemplate views:AddTaskPage}" />
         <ShellContent Title="Todo list" Route="TodoListPage"

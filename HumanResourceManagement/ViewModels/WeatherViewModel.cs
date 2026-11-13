@@ -12,25 +12,25 @@ namespace HumanResourceManagement.ViewModels
         private readonly WeatherCacheService weatherCacheService;
 
         [ObservableProperty]
-        private partial string Heading { get; set; } = "Weather Forecast (Vaasa)";
+        public partial string Heading { get; set; } = "Weather Forecast (Vaasa)";
 
         [ObservableProperty]
-        private partial string TemperatureText { get; set; } = "-- °C";
+        public partial string TemperatureText { get; set; } = "-- °C";
 
         [ObservableProperty]
-        private partial string WindText { get; set; } = "-- m/s";
+        public partial string WindText { get; set; } = "-- m/s";
 
         [ObservableProperty]
-        private partial string KitesurfAlert { get; set; } = "";
+        public partial string KitesurfAlert { get; set; } = "";
 
         [ObservableProperty]
-        private partial bool ShowKitesurfAlert { get; set; }
+        public partial bool ShowKitesurfAlert { get; set; }
 
         [ObservableProperty]
-        private partial bool IsBusy { get; set; }
+        public partial bool IsBusy { get; set; }
 
         [ObservableProperty]
-        private partial string Status { get; set; } = "";
+        public partial string Status { get; set; } = "";
 
         public WeatherViewModel(WeatherCacheService weatherCacheService)
         {

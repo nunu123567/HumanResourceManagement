@@ -3,6 +3,7 @@ using HumanResourceManagement.ViewModels;
 using HumanResourceManagement.Views;
 using Microsoft.Extensions.Logging;
 
+
 namespace HumanResourceManagement
 {
     public static class MauiProgram
@@ -36,6 +37,8 @@ namespace HumanResourceManagement
             });
             builder.Services.AddTransient<WeatherCacheService>();
             builder.Services.AddSingleton<IPreferences>(Preferences.Default);
+            builder.Services.AddTransient<HomeViewModel>();
+            builder.Services.AddTransient<HomePage>();
             return builder.Build();
         }
     }
