@@ -23,7 +23,7 @@ namespace HumanResourceManagement.Services
             string lat = latitude.ToString(CultureInfo.InvariantCulture);
             string lon = longitude.ToString(CultureInfo.InvariantCulture);
 
-            // Ensures wind speed is requested in m/s instead of km/h
+            // wind speed is requested in m/s instead of km/h
             string url = $"v1/forecast?latitude={lat}&longitude={lon}&current=temperature_2m,wind_speed_10m&wind_speed_unit=ms";
 
             try

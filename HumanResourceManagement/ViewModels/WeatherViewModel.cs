@@ -9,7 +9,7 @@ namespace HumanResourceManagement.ViewModels
 {
     public partial class WeatherViewModel : ObservableObject
     {
-        private readonly WeatherCacheService weatherCacheService;
+        private readonly IWeatherService weatherService;
 
         [ObservableProperty]
         public partial string Heading { get; set; } = "Weather Forecast (Vaasa)";
@@ -32,9 +32,9 @@ namespace HumanResourceManagement.ViewModels
         [ObservableProperty]
         public partial string Status { get; set; } = "";
 
-        public WeatherViewModel(WeatherCacheService weatherCacheService)
+        public WeatherViewModel(IWeatherService weatherService)
         {
-            this.weatherCacheService = weatherCacheService;
+            this.weatherService = weatherService;
         }
 
         [RelayCommand]
@@ -47,7 +47,8 @@ namespace HumanResourceManagement.ViewModels
             try
             {
                 // Vaasa coordinates: Latitude 63.10, Longitude 21.62
-                WeatherData weather = await weatherCacheService.GetLatestWeatherAsync(63.10, 21.62);
+                // Note: If your IWeatherService method name differs (e.g. GetWeatherAsync), update it here.
+                WeatherData weather = await weatherService.GetWeatherAsync(63.10, 21.62);
 
                 if (weather?.Current != null)
                 {

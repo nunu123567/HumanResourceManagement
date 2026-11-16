@@ -11,8 +11,8 @@ namespace HumanResourceManagement.ViewModels
 {
     public partial class HomeViewModel : ObservableObject
     {
-        private readonly WeatherCacheService weatherCacheService;
-        private readonly TodoStore todoRepository; // Or your TodoStore reference
+        private readonly IWeatherService weatherService;
+        private readonly TodoStore todoRepository;
 
         [ObservableProperty]
         public partial ObservableCollection<TodoItem> TopTodos { get; set; } = new();
@@ -35,9 +35,9 @@ namespace HumanResourceManagement.ViewModels
         [ObservableProperty]
         public partial string Status { get; set; } = "";
 
-        public HomeViewModel(WeatherCacheService weatherCacheService, TodoStore todoRepository)
+        public HomeViewModel(IWeatherService weatherService, TodoStore todoRepository)
         {
-            this.weatherCacheService = weatherCacheService;
+            this.weatherService = weatherService;
             this.todoRepository = todoRepository;
         }
 
@@ -57,7 +57,6 @@ namespace HumanResourceManagement.ViewModels
                     .ThenBy(t => t.DueDate)
                     .Take(3)
                     .ToList();
-                
 
                 TopTodos.Clear();
                 foreach (var todo in top3)
@@ -65,8 +64,9 @@ namespace HumanResourceManagement.ViewModels
                     TopTodos.Add(todo);
                 }
 
-                // 2. Load Weather for Vaasa (Latitude 63.10, Longitude 21.62) [cite: ]
-                WeatherData weather = await weatherCacheService.GetLatestWeatherAsync(63.10, 21.62);
+                // 2. Load Weather for Vaasa (Latitude 63.10, Longitude 21.62)
+                // Note: If your IWeatherService uses a different method name like GetLatestWeatherAsync, change it here.
+                WeatherData weather = await weatherService.GetWeatherAsync(63.10, 21.62);
 
                 if (weather?.Current != null)
                 {

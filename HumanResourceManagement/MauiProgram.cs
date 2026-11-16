@@ -54,7 +54,6 @@ namespace HumanResourceManagement
                 client.BaseAddress = new Uri("https://api.open-meteo.com/");
                 client.Timeout = TimeSpan.FromSeconds(10);
             });
-            builder.Services.AddTransient<WeatherCacheService>();
             builder.Services.AddSingleton<IPreferences>(Preferences.Default);
 
             // --- Build App ---

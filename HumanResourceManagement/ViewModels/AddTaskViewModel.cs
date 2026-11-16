@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.VisualBasic;
-//using ObjCBindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,23 +22,10 @@ namespace HumanResourceManagement.ViewModels
         {
             this.store = store;
             this.preferences = preferences;
-            //ApplyDefaults();
         }
 
-       // public void ApplyDefaults()
-        //{
-            // TODO 2c: set Category and Priority from the preferences
-            //          (Get returns an int for the priority – it fits into the double Priority)
-          //  Category = preferences.Get(SettingsKeys.DefaultCategory, SettingsDefaults.DefaultCategory);
-            //Priority = preferences.Get(SettingsKeys.DefaultPriority, SettingsDefaults.DefaultPriority);
-        //}
-
-        // Save(): after  Title = "";  Notes = "";
-        // TODO 2d: call ApplyDefaults() so the next task starts from the defaults again
         public void OnAppearing()
         {
-            // TODO 2e: apply the defaults only if the form is still empty (Title is empty).
-            //          Do not overwrite a task the user is in the middle of writing.
             if (string.IsNullOrEmpty(Title) && string.IsNullOrEmpty(Notes))
             {
                 //ApplyDefaults();
@@ -47,7 +33,7 @@ namespace HumanResourceManagement.ViewModels
         }
 
         [RelayCommand(CanExecute = nameof(CanSave))]
-        private async Task SaveAsync()        // the generated command is STILL called SaveCommand
+        private async Task SaveAsync()        
         {
             var item = new TodoItem
             {
