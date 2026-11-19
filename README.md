@@ -31,7 +31,7 @@ LifeManagementApp/
 ├── Models/        TodoItem.cs, WeatherData.cs
 ├── ViewModels/    HomeViewModel.cs, TodoListViewModel.cs, AddTaskViewModel.cs, WeatherViewModel.cs
 ├── Views/         HomePage.xaml, TodoListPage.xaml, AddTaskPage.xaml, WeatherPage.xaml
-├── Services/      IWeatherService.cs, WeatherService.cs, ITodoRepository.cs, EfTodoRepository.cs, TodoStore.cs
+├── Services/      IWeatherService.cs, WeatherService.cs, ITodoRepository.cs, EfTodoRepository.cs, TodoStore.cs, WeatherServiceException.cs
 ├── Data/          AppDbContext.cs
 ├── AppShell.xaml  (Shell navigation routing)
 ├── MauiProgram.cs (Dependency Injection container configuration)
