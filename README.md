@@ -53,11 +53,8 @@ Select your preferred target framework (e.g., net9.0-windows10.0.19041 or an And
 
 Press F5 or click the Start Debugging button to build and run the application.
 
-## 5. AI Use
-During the development of this project, artificial intelligence tools (such as large language models) were utilized for the following purposes:
-
-Debugging & Exception Resolution: Troubleshooting C# compiler errors, XAML namespace mappings, and asynchronous data-binding lifecycle events.
-
-Boilerplate Structuring: Formatting MVVM properties and organizing LINQ queries for the Top 3 priority-based sorting logic.
-
-Documentation Support: Assisting in structuring and formatting this README.md file according to the course template specifications.
+## AI Use
+I used AI as a coding assistant during development to help:
+- Debug compiler errors, runtime exceptions, and page/ViewModel issues.
+- Set up and understand data persistence with SQLite and Entity Framework Core (including `AppDbContext`, `EfTodoRepository`, and `TodoStore`).
+- Structure and format project documentation.
